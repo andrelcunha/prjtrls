@@ -83,8 +83,10 @@ if (count($mensagens) == 0)
             $login->dinheiro    = $jogobj->dinheiro;
             $login->pontos      = $jogobj->pontos;
 
-            $bonus              = new DateTime($jogobj->databonus);
-            $agora              = new DateTime($jogobj->dataagora);            
+            //$bonus              = new DateTime($jogobj->databonus);
+            //$agora              = new DateTime($jogobj->dataagora);
+            $bonus = date_create("@$jogobj->databonus");
+            $agora = date_create("@$jogobj->dataagora");
             $intervalo          = $bonus->diff($agora);
             $intervint          = (float)$intervalo->format('%a');
 
@@ -94,7 +96,7 @@ if (count($mensagens) == 0)
             {
                 $jogobj->diabonus++;
 
-                if ($jogobj->diabonus > bonusdiario::ObterDiaMaximo())
+                if ($jogobj->diabonus > lib\bonusdiario::ObterDiaMaximo())
                 {
                     $jogobj->diabonus  = 1;
                 }
@@ -109,9 +111,10 @@ if (count($mensagens) == 0)
 
             if ($atualbonus)
             {
-                $valor = bonusdiario::ObterValorDia($jogobj->diabonus);
+                $valor = lib\bonusdiario::ObterValorDia($jogobj->diabonus);
 
-                $jogobj->databonus  =   $agora;
+                //$jogobj->databonus  =   $agora;
+                $jogobj->databonus  =   $jogobj->dataagora;
                 $jogobj->dinheiro   +=  $valor;
                 $jogobj->AtualizarBonus();
             }
