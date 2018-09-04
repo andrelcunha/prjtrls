@@ -84,7 +84,7 @@ if (count($mensagens) == 0)
             $login->pontos      = $jogobj->pontos;
 
             $bonus              = new DateTime($jogobj->databonus);
-            $agora              = new DateTime($jogobj->dataagora);
+            $agora              = new DateTime($jogobj->dataagora);            
             $intervalo          = $bonus->diff($agora);
             $intervint          = (float)$intervalo->format('%a');
 
@@ -116,7 +116,7 @@ if (count($mensagens) == 0)
                 $jogobj->AtualizarBonus();
             }
 
-            $login->tickets     = $jobobj->tickets;
+            $login->tickets     = $jogobj->tickets;
             $login->ganharbonus = 0;
             $login->bonusdiario = 0;
 
