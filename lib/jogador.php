@@ -20,10 +20,9 @@ class jogador
     public function Selecionar($id)
     {
         $sql    = 'SELECT alunoId, jogadorDinheiro, jogadorPontuacao, corcabeloId, corpeleId, jogadorSexo, jogadorAno, jogadorDiaBonus, ' .
-                  'jogadorDataBonus, jogadorTicketQuiz, NOW() AS horaAgora ' .
+                  'jogadorDataBonus, jogadorTicketsQuiz, NOW() AS horaAgora ' .
                   'FROM jogadores ' .
                   "WHERE alunoId = '$id'";
-
         $db     = new bancodados();
         $res    = $db->SelecionarAssociativa($sql);
 
@@ -42,7 +41,7 @@ class jogador
                 $this->ano              = $jogador["jogadorAno"];
                 $this->diabonus         = $jogador["jogadorDiaBonus"];
                 $this->databonus        = strtotime($jogador["jogadorDataBonus"]);
-                $this->tickets          = $jogador["jogadorTicketQuiz"];
+                $this->tickets          = $jogador["jogadorTicketsQuiz"];
                 $this->dataagora        = strtotime($jogador["horaAgora"]);
             }
         }
@@ -82,7 +81,7 @@ class jogador
     {
         $sql    = 'INSERT INTO jogadores ' .
                   '(alunoId, jogadorDinheiro, jogadorPontuacao, corcabeloId, corpeleId, jogadorSexo, jogadorAno, jogadorDiaBonus, ' .
-                  'jogadorDataBonus, jogadorTicketQuiz) ' . 
+                  'jogadorDataBonus, jogadorTicketsQuiz) ' . 
                   "VALUES ('$this->id', $this->dinheiro, $this->pontos, $cabelo, $pele, $this->sexo, $this->ano, $this->diabonus, " .
                   "NOW(), $this->tickets)";
 
@@ -103,7 +102,7 @@ class jogador
                   "jogadorAno = $this->ano, " .
                   "jogadorDiaBonus = $this->diabonus, " .
                   "jogadorDataBonus = '" . date('Y-m-d H:i:s', $this->databonus) . "', " .
-                  "jogadorTicketQuiz = $this->tickets " .
+                  "jogadorTicketsQuiz = $this->tickets " .
                   "WHERE alunoId = '$this->id'";
 
         $db         = new bancodados();

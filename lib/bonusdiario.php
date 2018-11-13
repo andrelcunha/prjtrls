@@ -1,4 +1,6 @@
 <?php
+namespace lib;
+
 class bonusdiario
 {
     public static function ObterDiaMaximo()
